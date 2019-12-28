@@ -24,27 +24,12 @@ func main() {
 	FileName := CmdLineArgs[0] + ".txt"
 
 	if len(CmdLineArgs) < 2 {
-		createGeneral(FileName)
+		FolderName := "General"
+		createFolder(FileName, FolderName)
 	} else {
 		FolderName := CmdLineArgs[1]
 		createFolder(FileName, FolderName)
 	}
-}
-
-func createGeneral(FileName string) {
-	if _, err := os.Stat("./General"); os.IsNotExist(err) {
-		fmt.Println("created folder: General")
-		os.Mkdir("General", os.ModePerm)
-		createFileInGeneral(FileName)
-	} else {
-		fmt.Println("add File to Folder: General")
-		createFileInGeneral(FileName)
-	}
-}
-
-func createFileInGeneral(FileName string) {
-	GeneralPath, _ := filepath.Abs("./General/" + FileName)
-	os.Create(GeneralPath)
 }
 
 func createFolder(FileName string, FolderName string) {
@@ -54,7 +39,7 @@ func createFolder(FileName string, FolderName string) {
 		createFileInFolder(FileName, FolderName)
 
 	} else {
-		fmt.Println("add File" + FileName + " to Folder:" + FolderName)
+		fmt.Println("add File " + FileName + " to Folder: " + FolderName)
 		createFileInFolder(FileName, FolderName)
 	}
 }
