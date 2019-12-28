@@ -1,3 +1,16 @@
+/*
+	Author: @lucabockmann
+
+	Shell function:
+
+	function note() {
+    	cd
+    	cd <path to go workspace>
+    	go run main.go $1 $2
+    	cd
+	}
+*/
+
 package main
 
 import (
@@ -9,8 +22,6 @@ import (
 func main() {
 	CmdLineArgs := os.Args[1:]
 	FileName := CmdLineArgs[0] + ".txt"
-
-	fmt.Println(CmdLineArgs)
 
 	if len(CmdLineArgs) < 2 {
 		createGeneral(FileName)
