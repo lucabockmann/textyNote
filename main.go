@@ -24,11 +24,9 @@ func main() {
 	FileName := CmdLineArgs[0] + ".txt"
 
 	if len(CmdLineArgs) < 2 {
-		FolderName := "General"
-		createFolder(FileName, FolderName)
+		createFolder(FileName, "General")
 	} else {
-		FolderName := CmdLineArgs[1]
-		createFolder(FileName, FolderName)
+		createFolder(FileName, CmdLineArgs[1])
 	}
 }
 
@@ -37,7 +35,6 @@ func createFolder(FileName string, FolderName string) {
 		fmt.Println("created folder: " + FolderName)
 		os.Mkdir(FolderName, os.ModePerm)
 		createFileInFolder(FileName, FolderName)
-
 	} else {
 		fmt.Println("add File " + FileName + " to Folder: " + FolderName)
 		createFileInFolder(FileName, FolderName)
