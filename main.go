@@ -9,6 +9,13 @@
     	go run main.go $1 $2
     	cd
 	}
+
+	function tn() {
+    	cd
+    	cd <path to go workspace>
+    	go run main.go $1 $2
+    	cd
+	}
 */
 
 package main
