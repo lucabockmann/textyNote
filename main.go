@@ -23,8 +23,11 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"path/filepath"
 )
+
+const DefaultEditor = "code"
 
 func main() {
 	CmdLineArgs := os.Args[1:]
@@ -50,5 +53,30 @@ func createFolder(FileName string, FolderName string) {
 
 func createFileInFolder(FileName string, FolderName string) {
 	FolderPath, _ := filepath.Abs("./" + FolderName + "/" + FileName)
+
 	os.Create(FolderPath)
+
+	openFileInEditor(FileName, FolderName)
+}
+
+func openFileInEditor(FileName string, FolderName string) error {
+	editor := os.Getenv("EDITOR")
+
+	if editor == "" {
+		editor = DefaultEditor
+	}
+
+	executable, err := exec.LookPath(editor)
+
+	if err != nil {
+		return err
+	}
+
+	cmd := exec.Command(executable, FolderName+"/"+FileName)
+
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+
+	return cmd.Run()
 }
